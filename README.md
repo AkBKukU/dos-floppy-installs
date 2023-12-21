@@ -116,13 +116,11 @@ Full Install BAT File
     
     REM Add to AUTOEXEC.BAT
     find /c /I "%AUTOEXEC_SYS%" C:\AUTOEXEC.BAT >NUL
-    if %ERRORLEVEL%==1 (
-        echo %AUTOEXEC_SYS% >> C:\AUTOEXEC.BAT
-    )
+    if %ERRORLEVEL%==1 echo %AUTOEXEC_SYS% >> C:\AUTOEXEC.BAT
     
 This is an example of installing [Cute Mouse](https://cutemouse.sourceforge.net/) 
 which only needs a single EXE file to be run from `AUTOEXEC.BAT` to work. The
-mains thing to note is that you could replace the variable for what write to 
+main thing to note is that you could replace the variable for what write to
 `AUTOEXEC.BAT` with multiple hard coded lines instead if you were adding 
 something more complext. And that this can only postpend to the end of the file.
 If you are using [MENUs](https://archive.org/details/msdos_manual_622/page/n29/mode/2up)
@@ -151,15 +149,11 @@ Full Install BAT File
     
     REM Add to CONFIG.SYS
     find /c /I "%CONFIG_SYS%" C:\CONFIG.SYS >NUL
-    if %ERRORLEVEL%==1 (
-        echo %CONFIG_SYS% >> C:\CONFIG.SYS
-    )
+    if %ERRORLEVEL%==1 echo %CONFIG_SYS% >> C:\CONFIG.SYS
     
     REM Add to AUTOEXEC.BAT
     find /c /I "%AUTOEXEC_SYS%" C:\AUTOEXEC.BAT >NUL
-    if %ERRORLEVEL%==1 (
-        echo %AUTOEXEC_SYS% >> C:\AUTOEXEC.BAT
-    )
+    if %ERRORLEVEL%==1 echo %AUTOEXEC_SYS% >> C:\AUTOEXEC.BAT
 
 This example installs the CD-ROM driver available on the Windows 98 Startup 
 disk to an MS-DOS system. This is mostly the same as the **AUTOEXEC.BAT 
