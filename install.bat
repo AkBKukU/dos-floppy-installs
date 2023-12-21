@@ -1,0 +1,51 @@
+@ECHO OFF
+
+SET INSTALL_DIR=C:\BIN\DEST
+SET INSTALL_SED=C:\\BIN\\DEST
+
+SET SOURCE_ZIP=PROG.ZIP
+
+SET CONFIG_SYS=DEVICE=%INSTALL_DIR%\DRIVER.SYS /O:OPTION
+SET AUTOEXEC_SYS=C:\DOS\MSCDEX.EXE /D:OAKCD
+
+echo Installing Program to %INSTALL_DIR%
+
+REM Make install directory
+IF NOT EXIST %INSTALL_DIR%\NUL MKDIR /S %INSTALL_DIR%
+
+
+REM Copy files
+XCOPY /E *.* %INSTALL_DIR%\
+
+REM Clean copied files
+del %INSTALL_DIR%\INSTALL.BAT
+del %INSTALL_DIR%\SED.COM
+del %INSTALL_DIR%\UNZIP.EXE
+
+REM Decompress Files
+UNZIP %SOURCE_ZIP% -d %INSTALL_DIR%\
+
+
+REM Add to PATH
+find /c /I "%INSTALL_DIR%" C:\AUTOEXEC.BAT >NUL
+if %ERRORLEVEL%==1 (
+    IF EXIST C:\AUTOEXEC.IST DEL C:\AUTOEXEC.IST
+    REN C:\AUTOEXEC.BAT C:\AUTOEXEC.IST
+    SED "s/^PATH.*/$0;%INSTALL_SED%/" C:\AUTOEXEC.IST > C:\AUTOEXEC.BAT
+)
+
+REM Add to CONFIG.SYS
+find /c /I "%CONFIG_SYS%" C:\CONFIG.SYS >NUL
+if %ERRORLEVEL%==1 (
+    REM Multiple hard coded lines could be used instead
+    echo %CONFIG_SYS% >> C:\CONFIG.SYS
+)
+
+REM Add to AUTOEXEC.BAT
+find /c /I "%AUTOEXEC_SYS%" C:\AUTOEXEC.BAT >NUL
+if %ERRORLEVEL%==1 (
+    REM Multiple hard coded lines could be used instead
+    echo %AUTOEXEC_SYS% >> C:\AUTOEXEC.BAT
+)
+
+
